@@ -142,19 +142,16 @@
 	<h1 class="text-3xl font-bold">Notification Test</h1>
 	<div class="flex flex-row justify-around w-full">
 		<button
-			class="test-button"
 			onclick={requestPermission}
 			disabled={permission === "granted" || permission === "denied"}
 			>{rpButtonText}</button
 		>
 		<button
-			class="test-button"
 			onclick={sendNotification}
 			disabled={permission !== "granted"}>Local Notification</button
 		>
 		<form method="POST" use:enhance={enhanceHandlePushNotification}>
 			<button
-				class="test-button"
 				disabled={permission !== "granted" ||
 					!("PushManager" in window) ||
 					!("serviceWorker" in navigator)}

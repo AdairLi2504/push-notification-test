@@ -138,6 +138,11 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Push Notification Test</title>
+	<meta name="description" content="A website that tests whether the browser can receive remote notifications." />
+</svelte:head>
+
 <main class="flex flex-col items-center min-w-3/5 gap-6">
 	<h1 class="text-3xl font-bold">Notification Test</h1>
 	<div class="flex flex-row justify-around w-full">
@@ -146,9 +151,8 @@
 			disabled={permission === "granted" || permission === "denied"}
 			>{rpButtonText}</button
 		>
-		<button
-			onclick={sendNotification}
-			disabled={permission !== "granted"}>Local Notification</button
+		<button onclick={sendNotification} disabled={permission !== "granted"}
+			>Local Notification</button
 		>
 		<form method="POST" use:enhance={enhanceHandlePushNotification}>
 			<button
@@ -183,18 +187,20 @@
 			></span
 		>
 	</div>
-	<div>
-		<h2>History</h2>
-		{#if notifications.length === 0}
-			<p>No notifications sent yet</p>
-		{:else}
-			<button onclick={clearHistory}>Clear</button>
-			<ul>
-				{#each notifications as notif}
-					<li>{notif}</li>
-				{/each}
-			</ul>
-		{/if}
+	<div class="flex flex-row w-full justify-start">
+		<div>
+			<h2>History</h2>
+			{#if notifications.length === 0}
+				<p>No notifications sent yet</p>
+			{:else}
+				<button onclick={clearHistory}>Clear</button>
+				<ul>
+					{#each notifications as notif}
+						<li>{notif}</li>
+					{/each}
+				</ul>
+			{/if}
+		</div>
 	</div>
 </main>
 

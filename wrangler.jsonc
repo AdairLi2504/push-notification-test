@@ -11,6 +11,12 @@
 		"nodejs_compat",
 		"nodejs_als"
 	],
+	"routes": [
+		{
+			"pattern": "push-notification-test.pp.ua",
+			"custom_domain": true
+		}
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
@@ -35,7 +41,9 @@
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
-	"vars": {  "publicKey": "BLIFD7Vc53hwr34tZuJRiOESvz9_A__SPYuDhPQLSyCnn27KxuIeBGnOkKZOOOSX85htYirKLtFeIYKQ1PW4avA" }
+	"vars": {
+		"publicKey": "BLIFD7Vc53hwr34tZuJRiOESvz9_A__SPYuDhPQLSyCnn27KxuIeBGnOkKZOOOSX85htYirKLtFeIYKQ1PW4avA"
+	}
 	/**
 	 * Service Bindings (communicate between multiple Workers)
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings

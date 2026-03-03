@@ -37,7 +37,7 @@ self.addEventListener("activate", (event) => {
  */
 self.addEventListener("push", (event) => {
   console.log("[SW] Push event received");
-
+  const receivedAt = new Date().toLocaleTimeString();
   // Default notification content (fallback when payload is empty or parsing fails)
   let data = {
     title: "Test Notification",
@@ -59,9 +59,23 @@ self.addEventListener("push", (event) => {
 
   // Display system notification (must be called within the push event)
   event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-    })
+    (async () => {
+      await self.registration.showNotification(data.title, {
+        body: data.body,
+      });
+
+      const clientList = await self.clients.matchAll({
+        type: "window",
+        includeUncontrolled: true,
+      });
+
+      for (const client of clientList) {
+        client.postMessage({
+          type: "push-received",
+          receivedAt,
+        });
+      }
+    })()
   );
 });
 

@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { browser } from "$app/environment";
 	import { enhance } from "$app/forms";
 	import type { SubmitFunction } from "@sveltejs/kit";
+	import { onMount } from "svelte";
 	import type { PageProps } from "./$types";
 	let { data }: PageProps = $props();
-
 	let permission = $state<NotificationPermission>("default");
 	let notifications = $state<string[]>([]);
 	let rpButtonText = $state<string>("Request Permission");
@@ -24,8 +25,34 @@
 		return outputArray;
 	}
 
+	onMount(() => {
+		if (!browser || !("serviceWorker" in navigator)) return;
+
+		const onServiceWorkerMessage = (event: MessageEvent) => {
+			if (event.data?.type === "push-received") {
+				const receivedAt =
+					typeof event.data.receivedAt === "string"
+						? event.data.receivedAt
+						: new Date().toLocaleTimeString();
+				notifications = [
+					...notifications,
+					`${receivedAt}: Received Push Notification`,
+				];
+			}
+		};
+
+		navigator.serviceWorker.addEventListener("message", onServiceWorkerMessage);
+
+		return () => {
+			navigator.serviceWorker.removeEventListener(
+				"message",
+				onServiceWorkerMessage,
+			);
+		};
+	});
+
 	$effect(() => {
-		if (typeof window !== "undefined" && "Notification" in window) {
+		if (browser && "Notification" in window) {
 			permission = Notification.permission;
 			switch (permission) {
 				case "granted":
@@ -157,6 +184,7 @@
 		<form method="POST" use:enhance={enhanceHandlePushNotification}>
 			<button
 				disabled={permission !== "granted" ||
+					!browser ||
 					!("PushManager" in window) ||
 					!("serviceWorker" in navigator)}
 				>Push Remote Notification</button

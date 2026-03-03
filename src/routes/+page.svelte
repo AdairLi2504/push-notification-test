@@ -143,9 +143,9 @@
 	<meta name="description" content="A website that tests whether the browser can receive remote notifications." />
 </svelte:head>
 
-<main class="flex flex-col items-center min-w-3/5 gap-6">
-	<h1 class="text-3xl font-bold">Notification Test</h1>
-	<div class="flex flex-row justify-around w-full">
+<main class="flex flex-col items-center min-w-3/5">
+	<h1>Notification Test</h1>
+	<div class="flex flex-row justify-around w-full gap-2">
 		<button
 			onclick={requestPermission}
 			disabled={permission === "granted" || permission === "denied"}
@@ -163,8 +163,8 @@
 			>
 		</form>
 	</div>
-	<div class="flex flex-row gap-4">
-		<h3 class="font-bold">Feature Detection:</h3>
+	<div class="flex flex-row items-center gap-4">
+		<h4>Feature Detection:</h4>
 		<span
 			>Notification:<span class="font-semibold"
 				>{typeof window !== "undefined" && "Notification" in window
@@ -187,9 +187,11 @@
 			></span
 		>
 	</div>
+	<div class="flex flex-row items-center"><h4>User-Agent:</h4>{typeof window !== "undefined" && navigator.userAgent
+		 ? navigator.userAgent : "Unknown"}</div>
 	<div class="flex flex-row w-full justify-start">
 		<div>
-			<h2>History</h2>
+			<div class="font-bold">History</div>
 			{#if notifications.length === 0}
 				<p>No notifications sent yet</p>
 			{:else}

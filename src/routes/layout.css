@@ -4,4 +4,10 @@
   button {
     all: revert; 
   }
+  h1 {
+    all: revert; 
+  }
+  h4 {
+    all: revert; 
+  }
 }

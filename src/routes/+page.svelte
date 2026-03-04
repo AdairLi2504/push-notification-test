@@ -41,7 +41,10 @@
 			}
 		};
 
-		navigator.serviceWorker.addEventListener("message", onServiceWorkerMessage);
+		navigator.serviceWorker.addEventListener(
+			"message",
+			onServiceWorkerMessage,
+		);
 
 		return () => {
 			navigator.serviceWorker.removeEventListener(
@@ -167,7 +170,10 @@
 
 <svelte:head>
 	<title>Push Notification Test</title>
-	<meta name="description" content="A website that tests whether the browser can receive remote notifications." />
+	<meta
+		name="description"
+		content="A website that tests whether the browser can receive remote notifications."
+	/>
 </svelte:head>
 
 <main class="flex flex-col items-center min-w-3/5">
@@ -215,10 +221,14 @@
 			></span
 		>
 	</div>
-	<div class="flex flex-row items-center"><h4>User-Agent:</h4>{typeof window !== "undefined" && navigator.userAgent
-		 ? navigator.userAgent : "Unknown"}</div>
-	<div class="flex flex-row w-full justify-start">
-		<div>
+	<div class="flex flex-row items-center">
+		<h4>User-Agent:</h4>
+		{typeof window !== "undefined" && navigator.userAgent
+			? navigator.userAgent
+			: "Unknown"}
+	</div>
+	<div class="flex flex-row w-full justify-between">
+		<div class="w-1/4">
 			<div class="font-bold">History</div>
 			{#if notifications.length === 0}
 				<p>No notifications sent yet</p>
@@ -231,6 +241,12 @@
 				</ul>
 			{/if}
 		</div>
+		<div class="w-2/3 flex flex-col items-center">
+		<div>
+			<a href="https://github.com/AdairLi2504/push-notification-test">Github</a> \
+			<a href="/readme.html">Readme</a>
+		</div>
+		</div>
 	</div>
 </main>
 
@@ -238,5 +254,19 @@
 	@reference "tailwindcss";
 	:global(body) {
 		@apply flex items-center justify-center w-screen h-screen;
+	}
+	@layer base {
+		button {
+			all: revert;
+		}
+		h1 {
+			all: revert;
+		}
+		h4 {
+			all: revert;
+		}
+		a {
+			all: revert;
+		}
 	}
 </style>

@@ -68,11 +68,11 @@
 <body>
     <div class="markdown-content">
 <h1>Push Notification Test</h1>
-<p><a href="https://push-notification-test.pp.ua">push-notification-test.pp.ua</a></p>
+<p><a href="/">Back to Main Page</a></p>
 <p>This a website that tests whether the browser can receive remote notifications. It includes a checker for if the browser supports PushManager, serviceWorker, and Notification, and also can try to send a real push notification.</p>
 <h3>What&#39;s the (Web) Push Notification</h3>
 <p>Web Push Notification is a technology that allows websites to send real-time messages to users even when the browser is closed. It is implemented through push services provided by browser vendors (such as FCM and APNs) and Service Workers. Users must grant permission to receive notifications, after which the website can deliver messages to the user&#39;s device via the push service, displaying alerts even if the page is not open. This mechanism is widely used in scenarios such as news subscriptions, social interactions, and marketing campaigns, effectively enhancing user engagement and message reachability.</p>
-<p>About Frontend: <a href="developer.mozilla.org/en-US/docs/Web/API/Push_API">Push API (MDN)</a><br>About Backend (nodejs): <a href="www.npmjs.com/package/web-push">web-push (NPM)</a></p>
+<p>About Frontend: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Push_API">Push API (MDN)</a><br>About Backend (nodejs): <a href="https://www.npmjs.com/package/web-push">web-push (NPM)</a></p>
 <h3>Why does the Push Notification not Work?</h3>
 <p>First of all, make sure that the browser support all of Notification, PushManager and serviceWorker. Futhermore, it should also support VAPID for crypto. Some old browers use their private but depreacated service to handle push notification. No way to check if the browser supports that except by sending a real push notification. Details can be checked below.</p>
 <table>
